@@ -106,10 +106,9 @@
       <section id="download" aria-labelledby="download-title">
         <h2 id="download-title">Download</h2>
         <p style="color: var(--text-secondary); max-width: 640px;">
-          Crisp is built for iPhone (with Premium features on Apple Watch and widgets). When your App Store listing is live,
-          set <code>appStoreURL</code> in <code>site-config.js</code> and this button will link directly to your app.
+          Crisp is on the App Store for iPhone and iPad. Premium adds Apple Watch, widgets, iCloud sync, and more.
         </p>
-        <a id="app-store-link-footer" class="app-store-button is-disabled" href="#download" aria-disabled="true">
+        <a id="app-store-link-footer" class="app-store-button" href="https://apps.apple.com/app/crisp/id6797441105">
           Download on the App Store
         </a>
       </section>
@@ -287,21 +286,6 @@
     </footer>
 
     <script src="site-config.js"></script>
-    <script>
-      (function () {
-        const config = window.CRISP_SITE_CONFIG || {};
-        const url = (config.appStoreURL || "").trim();
-        const links = [document.getElementById("app-store-link"), document.getElementById("app-store-link-footer")];
-        links.forEach(function (link) {
-          if (!link) return;
-          if (url) {
-            link.href = url;
-            link.classList.remove("is-disabled");
-            link.removeAttribute("aria-disabled");
-          }
-        });
-      })();
-    </script>
     <script src="app.js"></script>
   </body>
 </html>

@@ -1,22 +1,28 @@
 (function () {
   const config = window.CRISP_SITE_CONFIG || {};
-  const link = document.getElementById("app-store-link");
+  const defaultStoreURL = "https://apps.apple.com/app/crisp/id6797441105";
+  const links = [
+    document.getElementById("app-store-link"),
+    document.getElementById("app-store-link-footer"),
+  ].filter(Boolean);
   const note = document.getElementById("app-store-note");
 
-  if (!link) return;
+  const configured = (config.appStoreURL || "").trim();
+  const url = configured || defaultStoreURL;
 
-  const url = (config.appStoreURL || "").trim();
-  if (url) {
+  links.forEach(function (link) {
     link.href = url;
     link.removeAttribute("aria-disabled");
     link.classList.remove("is-disabled");
-    if (note) note.textContent = "Available on iPhone.";
-  } else {
-    link.href = "#download";
-    link.setAttribute("aria-disabled", "true");
-    link.classList.add("is-disabled");
-    if (note) note.textContent = "Coming soon to the App Store — link updates automatically when you set appStoreURL in site-config.js.";
+  });
+
+  if (note && url) {
+    note.textContent = "Available on the App Store for iPhone and iPad.";
+  } else if (note) {
+    note.textContent = "Coming soon to the App Store.";
   }
+
+  if (!links.length) return;
 
   const email = (config.contactEmail || "").trim();
   document.querySelectorAll("[data-contact-email]").forEach((node) => {
